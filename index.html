@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood-Based Video Selector</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f3ec;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff5722, #ff9800);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+        }
+
+        header p {
+            margin: 10px 0;
+            font-size: 1.4em;
+        }
+
+        section {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        section h2 {
+            font-size: 2em;
+            color: #ff5722;
+        }
+
+        .content {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .button-container button:hover {
+            background: #e64a19;
+        }
+
+        .video-section {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .video-section iframe {
+            margin: 10px auto;
+            border: none;
+            width: 100%;
+            max-width: 560px;
+            height: 315px;
+            border-radius: 10px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎯 Mood-Based Video Selector 🎥</h1>
+        <p>Select videos based on your mood! 🌟</p>
+    </header>
+
+    <section>
+        <h2>Welcome to the Mood-Based Video Selector ✨</h2>
+        <div class="content">
+            <p>
+                Special thanks to **Sarkari Foodie** for their amazing contributions to this idea!  
+                This platform is here to make video discovery exciting and easy.  
+                Based on your mood, you can enjoy spicy 🌶️, sweet 🍫, or umami 🍖 video options.
+            </p>
+        </div>
+
+        <div class="button-container">
+            <button onclick="showVideos('spicy')">Spicy 🌶️</button>
+            <button onclick="showVideos('sweet')">Sweet 🍫</button>
+            <button onclick="showVideos('umami')">Umami 🍖</button>
+        </div>
+    </section>
+
+    <section id="video-section" class="video-section">
+        <h2 id="video-title">Videos for You:</h2>
+        <div id="video-container">
+            <!-- Videos will be dynamically injected here -->
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with ❤️ by Mood-Based Video Selector. © 2024</p>
+    </footer>
+
+    <script>
+        // Video links for Spicy, Sweet, and Umami categories
+        const videos = {
+            spicy: [
+                "https://www.youtube.com/embed/B1C10pLJrYo",
+                "https://www.youtube.com/embed/m_lrY9fvo1c",
+                "https://www.youtube.com/embed/4b-YtHs73GI"
+            ],
+            sweet: [
+                "https://www.youtube.com/embed/2Z4sf2KLlD8",
+                "https://www.youtube.com/embed/OcRQoJAWSDA",
+                "https://www.youtube.com/embed/kgXtAUzLpUU"
+            ],
+            umami: [
+                "https://www.youtube.com/embed/Wb1DKkjIuMI",
+                "https://www.youtube.com/embed/UeD5KOqY03k",
+                "https://www.youtube.com/embed/-gNaYIvB4Ds",
+                "https://www.youtube.com/embed/kq1e2OrXYx0",
+                "https://www.youtube.com/embed/oQotLWevhRc"
+            ]
+        };
+
+        function showVideos(category) {
+            const videoSection = document.getElementById("video-section");
+            const videoContainer = document.getElementById("video-container");
+            const videoTitle = document.getElementById("video-title");
+
+            // Update title based on category
+            videoTitle.textContent = 
+                category === "spicy" ? "Spicy Videos 🌶️" : 
+                category === "sweet" ? "Sweet Videos 🍫" : 
+                "Umami Videos 🍖";
+
+            // Clear previous videos
+            videoContainer.innerHTML = "";
+
+            // Add videos dynamically
+            videos[category].forEach(link => {
+                const iframe = document.createElement("iframe");
+                iframe.src = link;
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+                videoContainer.appendChild(iframe);
+            });
+
+            // Show video section
+            videoSection.style.display = "block";
+        }
+    </script>
+</body>
+</html>
